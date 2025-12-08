@@ -6,16 +6,16 @@
 extern Drive chassis;
 
 
-inline pros::Motor Intake1(10);
-inline pros::Motor Intake2(-3);
+inline pros::Motor Intake1(-1);
+inline pros::Motor Intake2(-5);
 
 // Sensores
-inline pros::Optical ColorSortSensor(9);
-inline pros::Imu IMU(15);
+inline pros::Optical ColorSortSensor(10);
+inline pros::Imu IMU(2);
 
 // Salidas digitales
 inline pros::ADIDigitalOut CenterGoal('A');
-inline pros::ADIDigitalOut MatchLoad('B');
+inline pros::ADIDigitalOut MatchLoad('D');
 inline pros::ADIDigitalOut Descore('C');
 // Your motors, sensors, etc. should go here.  Below are examples
 

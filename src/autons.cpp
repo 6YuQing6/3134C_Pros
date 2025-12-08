@@ -200,20 +200,21 @@ void HalfSoloAWP()
 {
   // chassis.pid_drive_set(27_in, DRIVE_SPEED);
   // chassis.pid_wait_until(25_in);
-  chassis.pid_drive_set(30_in, DRIVE_SPEED);
+  chassis.pid_drive_set(35_in, DRIVE_SPEED);
   chassis.pid_wait();
   Intake1.move(127);
   Intake2.move(-40); 
   MatchLoad.set_value(true);
   chassis.pid_turn_set(90_deg, TURN_SPEED);
-  chassis.pid_wait_until(88_deg);
-  chassis.pid_drive_set(21_in, 50);//90 SPEED DRIVE SPEED
+  chassis.pid_wait_until(90_deg);
+  chassis.pid_drive_set(19.5_in, 50);//90 SPEED DRIVE SPEED
   chassis.pid_wait_until(1_in);
+  pros::delay(137);
 
 
   chassis.pid_speed_max_set(DRIVE_SPEED);
   pros::delay(900);//MEJOR METER UNA ROJA POR SI ACASO 1300
-  chassis.pid_drive_set(-35_in, DRIVE_SPEED);//30
+  chassis.pid_drive_set(-32_in, DRIVE_SPEED);//30
   pros::delay(900);//  1100
   chassis.drive_set(-30, -30);
   Intake2.move(127);
