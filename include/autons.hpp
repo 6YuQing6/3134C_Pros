@@ -23,6 +23,7 @@ void HalfSoloAWP();
 void RightSideSuperRush();
 void RightSideRush();
 void RightSideRushPush();
+void jerryio_path_3134c_simple_auton();
 
 
 void LeftSideSuperRush();

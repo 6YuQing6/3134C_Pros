@@ -164,7 +164,7 @@ void autonomous()
   chassis.drive_sensor_reset();               // Reset drive sensors to 0
   chassis.odom_xyt_set(0_in, 0_in, 0_deg);    // Set the current position, you can start at a specific position with this
   chassis.drive_brake_set(MOTOR_BRAKE_HOLD);  // Set motors to hold.  This helps autonomous consistency
-
+  chassis.initialize();
   /*
   Odometry and Pure Pursuit are not magic
 
@@ -176,9 +176,12 @@ void autonomous()
    - avoid throwing momentum around (super harsh turns, like in the example below)
   You can do cool curved motions, but you have to give your robot the best chance
   to be consistent
+  
   */
-
-  ez::as::auton_selector.selected_auton_call();  // Calls selected auton from autonomous selector
+  // LeftSideSuperRush();
+  // ez::as::auton_selector.selected_auton_call();  // Calls selected auton from autonomous selector
+  // RightSideSuperRush();
+  jerryio_path_3134c_simple_auton();
 }
 
 /**
@@ -288,7 +291,9 @@ void ez_template_extras() {
 
 bool colorSort = true;
 bool descoreState = false;
+bool matchloaderState = false;
 bool downPressed = false;
+bool upPressed = false;
 
 void opcontrol() {
   // This is preference to what you like to drive on
@@ -310,7 +315,7 @@ void opcontrol() {
     // chassis.opcontrol_arcade_flipped(ez::SPLIT);    // Flipped split arcade
     // chassis.opcontrol_arcade_flipped(ez::SINGLE);   // Flipped single arcade
 
- if (master.get_digital(DIGITAL_DOWN)) {
+        if (master.get_digital(DIGITAL_UP)) {
             if (!downPressed) {
                 descoreState = !descoreState;
                 Descore.set_value(descoreState);
@@ -320,53 +325,60 @@ void opcontrol() {
             downPressed = false;
         }
 
+         if (master.get_digital(DIGITAL_DOWN)) {
+            if (!upPressed) {
+                matchloaderState = !matchloaderState;
+                MatchLoad.set_value(matchloaderState);
+                upPressed = true;
+            }
+        } else {
+            upPressed = false;
+        }
+
         // ---------------------------------------
         //              INTAKES
         // ---------------------------------------
 
         // L1 + L2 = Detener + lógica descore de seguridad
-        if (master.get_digital(DIGITAL_L1) && master.get_digital(DIGITAL_L2)) {
+        // if (master.get_digital(DIGITAL_L1) && master.get_digital(DIGITAL_L2)) {
 
-            Intake1.move(0);
-            Intake2.move(0);
+        //     Intake1.move(0);
+        //     Intake2.move(0);
+        // }
 
-            if (master.get_digital(DIGITAL_R1))
-                Descore.set_value(false);
-            else
-                Descore.set_value(true);
-        }
+        // // L1 + R1 = Match Load + Intake1 forward / Intake2 reverse suave
+        // else if (master.get_digital(DIGITAL_L1) && master.get_digital(DIGITAL_R1)) {
+        //     // MatchLoad.set_value(true);
 
-        // L1 + R1 = Match Load + Intake1 forward / Intake2 reverse suave
-        else if (master.get_digital(DIGITAL_L1) && master.get_digital(DIGITAL_R1)) {
-            MatchLoad.set_value(true);
-
-            Intake1.move(127);
-            Intake2.move(-35);
-        }
+        //     Intake1.move(127);
+        //     Intake2.move(-35);
+        // }
 
         // Solo L1 = Intake1 forward / Intake2 reverse suave
-        else if (master.get_digital(DIGITAL_L1)) {
-            Intake1.move(127);
-            Intake2.move(-35);
+        if (master.get_digital(DIGITAL_L1)) {
+            Intake1.move(-127);
+            Intake2.move(-127);
+
         }
 
         // Solo L2 = ambos intake reverse
         else if (master.get_digital(DIGITAL_L2)) {
-            Intake1.move(-127);
-            Intake2.move(-127);
+            Intake1.move(127);
+            Intake2.move(127);
+            CenterGoal.set_value(true);
         }
 
         // R1 = Intake1 forward / Intake2 forward
         else if (master.get_digital(DIGITAL_R1)) {
             Intake1.move(127);
-            Intake2.move(127);
+            Intake2.move(10);
         }
 
         // R2 = Intake1 forward + Intake2 reverse + CenterGoal on
         else if (master.get_digital(DIGITAL_R2)) {
             Intake1.move(127);
-            Intake2.move(10);
-            CenterGoal.set_value(true);
+            Intake2.move(127);
+            // CenterGoal.set_value(true);
         }
 
         // Nada presionado = detener intakes y actuadores
@@ -374,7 +386,7 @@ void opcontrol() {
             Intake1.move(0);
             Intake2.move(0);
             CenterGoal.set_value(false);
-            MatchLoad.set_value(false);
+            // MatchLoad.set_value(false);
         }
 
         // ---------------------------------------

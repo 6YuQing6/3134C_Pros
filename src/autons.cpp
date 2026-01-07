@@ -66,6 +66,10 @@ void default_constants() {
   chassis.pid_angle_behavior_set(ez::shortest);  // Changes the default behavior for turning, this defaults it to the shortest path there
 }
 
+// 21.5 
+// 17
+// 14.1
+
 void drive_example() 
 {
   // chassis.pid_turn_set(3600_deg, 40, ez::raw);
@@ -196,62 +200,73 @@ void pushToLongGoal()
   chassis.drive_set(0, 0);
 }
 
+// starts on the right black corner of parking zone, faces to the right perpendicular 
 void HalfSoloAWP()
 {
-  // chassis.pid_drive_set(27_in, DRIVE_SPEED);
-  // chassis.pid_wait_until(25_in);
+  // drives to loader 
   chassis.pid_drive_set(35_in, DRIVE_SPEED);
   chassis.pid_wait();
+  // runs intake
   Intake1.move(127);
   Intake2.move(-40); 
+  // turns toward loader
   MatchLoad.set_value(true);
   chassis.pid_turn_set(90_deg, TURN_SPEED);
   chassis.pid_wait_until(90_deg);
-  chassis.pid_drive_set(19.5_in, 50);//90 SPEED DRIVE SPEED
+  // drives forward into loader 
+  chassis.pid_drive_set(18.5_in, 50);//90 SPEED DRIVE SPEED
   chassis.pid_wait_until(1_in);
-  pros::delay(137);
+  pros::delay(139); // delays a bit for the matchloader balls to come in
 
-
+  // drives backwards to the long goal
   chassis.pid_speed_max_set(DRIVE_SPEED);
   pros::delay(900);//MEJOR METER UNA ROJA POR SI ACASO 1300
   chassis.pid_drive_set(-32_in, DRIVE_SPEED);//30
   pros::delay(900);//  1100
   chassis.drive_set(-30, -30);
+  // outakes balls into long goal
   Intake2.move(127);
   Descore.set_value(true);
   pros::delay(900);///////////////
   MatchLoad.set_value(false);
-  chassis.pid_drive_set(7_in, DRIVE_SPEED);
-  chassis.pid_wait_until(6_in); //6
-  Intake2.move(-40);
-  chassis.pid_turn_set(203_deg, TURN_SPEED);//203
-  chassis.pid_wait();
 
-  chassis.pid_drive_set(36_in, DRIVE_SPEED);//80 SPEED
-  chassis.pid_wait_until(16_in);//27 NO HE PROBADO
+  // moves forward to be away from long goal
+  chassis.pid_drive_set(10_in, DRIVE_SPEED); // 7
+  chassis.pid_wait_until(7_in); //6
+  Intake2.move(-40);
+  // rotates to face 3 red balls on the right
+  chassis.pid_turn_set(213_deg, TURN_SPEED);//203
+  chassis.pid_wait();
+  // moves forward to intake 3 red balls on the right 
+  chassis.pid_drive_set(35_in, DRIVE_SPEED);//80 SPEED
+  chassis.pid_wait_until(20_in);//27 NO HE PROBADO
   chassis.pid_speed_max_set(20);//70
   chassis.pid_wait_until(20_in);//27 NO HE PROBADO
   chassis.pid_speed_max_set(DRIVE_SPEED);//70
   chassis.pid_wait_until(35_in);//36
 
-
+  // moves forward to the left 3 balls 
+  Intake1.move(127);////////////////////////////////
   chassis.pid_turn_set(179_deg, TURN_SPEED);
   chassis.pid_wait_until(179_deg);  //178
-  chassis.pid_drive_set(35_in, DRIVE_SPEED);//34
-  chassis.pid_wait_until(23_in);// 30
-  MatchLoad.set_value(true);
-  chassis.pid_wait_until(33_in);//32
-  MatchLoad.set_value(false);
+  chassis.pid_drive_set(47_in, DRIVE_SPEED);//35
+  chassis.pid_wait_until(45_in);// 30
+  // MatchLoad.set_value(true);
+  // chassis.pid_wait_until(40_in);//32
+  // sets matchloader up
+  // MatchLoad.set_value(false);
+  // turns toward top middle goal
   chassis.pid_turn_set(133_deg, TURN_SPEED);//135
   chassis.pid_wait_until(135_deg);///130
   chassis.pid_drive_set(-16_in, DRIVE_SPEED);
-  Intake1.move(-127);////////////////////////////////
-  chassis.pid_wait_until(-1_in);////////////////////////////////////
-  Intake1.move(0);///////////////////////////////////
+
+  Intake2.move(127);//////////////
+  chassis.pid_wait_until(-16_in);////////////////////////////////////
+  // Intake1.move(0);///////////////////////////////////
   CenterGoal.set_value(true);//////////////////////
   chassis.pid_wait_until(-9_in);   //11
-  Intake1.move(127);
-  Intake2.move(30);
+  // Intake1.move(127);
+  // Intake2.move(30);
   pros::delay(700);//600
 }
 
@@ -358,9 +373,76 @@ void SoloAWP()
 
 // }
 
+// Alternative autonomous path (simplified / approximate)
+// Goal: Rush forward, reposition across the field, collect, and prep for scoring
+void jerryio_path_3134c_simple_auton() {
 
-void RightSideSuperRush()
-{
+  // Step 1: Initial rush forward to collect early game objects
+  // Drive forward while running intakes to secure objects quickly
+  Intake1.move(127);
+  Intake2.move(-40); 
+  chassis.pid_drive_set(31_in, DRIVE_SPEED);
+  chassis.pid_wait_until(14_in);//27 NO HE PROBADO
+  chassis.pid_speed_max_set(20);//70
+  chassis.pid_wait_until(19_in);
+  chassis.pid_speed_max_set(DRIVE_SPEED);//70
+  chassis.pid_wait_until(31_in);
+  // chassis.pid_drive_set(24.5_in, DRIVE_SPEED); // 16.7
+  // chassis.pid_wait_until(16.5_in);
+  // chassis.pid_speed_max_set(20);//70
+  // chassis.pid_wait_until(24.5_in);
+  // chassis.pid_speed_max_set(DRIVE_SPEED);//7
+  // chassis.pid_wait_until(24.5);
+
+  // pros::delay(5000);
+
+
+  // // Step 2: Turn and traverse diagonally across the field
+  // // Reposition toward the next lane while temporarily stopping intakes
+  chassis.pid_turn_set(125_deg, TURN_SPEED);
+  chassis.pid_wait_until(125_deg);
+  chassis.pid_wait();
+  Intake1.move(0);
+  Intake2.move(0);
+  chassis.pid_drive_set(41.5_in, DRIVE_SPEED);
+  chassis.pid_wait_until(41.5_in);
+   MatchLoad.set_value(true);
+  // chassis.pid_heading_constants_set(0);
+  chassis.pid_turn_set(173_deg, TURN_SPEED);
+  chassis.pid_wait_until(173_deg);
+  // chassis.pid_wait();s
+  Intake1.move(127);
+  Intake2.move(0);
+  chassis.pid_drive_set(13_in, 127);
+  chassis.pid_wait_until(13_in);
+  pros::delay(500);
+  Intake1.move(0);
+  Intake2.move(0);
+  chassis.pid_drive_set(-29.8_in, DRIVE_SPEED);
+  chassis.pid_wait_until(-29.8_in);
+  Intake1.move(127);
+  Intake2.move(127);
+
+  // // Step 3: Fine alignment and short advance for match loading / pickup
+  // // Face left, re-enable intakes, and activate match loader while moving forward
+  // chassis.pid_turn_set(-120_deg, TURN_SPEED);
+  // chassis.pid_wait();
+  // Intake1.move(127);
+  // Intake2.move(-40);
+  // MatchLoad.set_value(true);
+  // chassis.pid_drive_set(9.8_in, DRIVE_SPEED);
+  // pros::delay(130);
+
+  // // Step 4: Final turn and forward adjustment
+  // // Rotate toward scoring or next interaction zone and move into position
+  // chassis.pid_turn_set(-170_deg, TURN_SPEED);
+  // pros::delay(50);
+  // chassis.pid_drive_set(23.8_in, DRIVE_SPEED);
+  // pros::delay(50);
+}
+
+
+void RightSideSuperRush(){
   Intake1.move(127);
   Intake2.move(-40);
   // chassis.pid_drive_set(31_in, DRIVE_SPEED);///////NUEVO ERA 80
@@ -852,13 +934,6 @@ void Skills()
   chassis.pid_wait_until(40_in); 
   MatchLoad.set_value(false);
 //  pros::delay(500);
-// MatchLoad.set_value(false);
-// pros::delay(600);
-//   chassis.drive_set(0, 0);
-
-
-  //////////////////////////
-
 }
 
 

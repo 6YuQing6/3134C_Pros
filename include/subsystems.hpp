@@ -14,9 +14,9 @@ inline pros::Optical ColorSortSensor(10);
 inline pros::Imu IMU(2);
 
 // Salidas digitales
-inline pros::ADIDigitalOut CenterGoal('A');
-inline pros::ADIDigitalOut MatchLoad('D');
-inline pros::ADIDigitalOut Descore('C');
+inline pros::ADIDigitalOut CenterGoal('H');
+inline pros::ADIDigitalOut MatchLoad('B');
+inline pros::ADIDigitalOut Descore('A');
 // Your motors, sensors, etc. should go here.  Below are examples
 
 // inline pros::Motor intake(1);
