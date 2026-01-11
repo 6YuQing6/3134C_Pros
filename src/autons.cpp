@@ -387,14 +387,6 @@ void jerryio_path_3134c_simple_auton() {
   chassis.pid_wait_until(19_in);
   chassis.pid_speed_max_set(DRIVE_SPEED);//70
   chassis.pid_wait_until(31_in);
-  // chassis.pid_drive_set(24.5_in, DRIVE_SPEED); // 16.7
-  // chassis.pid_wait_until(16.5_in);
-  // chassis.pid_speed_max_set(20);//70
-  // chassis.pid_wait_until(24.5_in);
-  // chassis.pid_speed_max_set(DRIVE_SPEED);//7
-  // chassis.pid_wait_until(24.5);
-
-  // pros::delay(5000);
 
 
   // // Step 2: Turn and traverse diagonally across the field
@@ -404,41 +396,34 @@ void jerryio_path_3134c_simple_auton() {
   chassis.pid_wait();
   Intake1.move(0);
   Intake2.move(0);
+
+  // drives toward point between loader and long goal
   chassis.pid_drive_set(41.5_in, DRIVE_SPEED);
   chassis.pid_wait_until(41.5_in);
-   MatchLoad.set_value(true);
-  // chassis.pid_heading_constants_set(0);
+  MatchLoad.set_value(true);
+
+   // turns towards loader 
   chassis.pid_turn_set(173_deg, TURN_SPEED);
   chassis.pid_wait_until(173_deg);
-  // chassis.pid_wait();s
+  // first intake is bottom, second is top
   Intake1.move(127);
   Intake2.move(0);
-  chassis.pid_drive_set(13_in, 127);
-  chassis.pid_wait_until(13_in);
-  pros::delay(500);
+
+  // Moves into matchloader 
+  chassis.pid_drive_set(14.5_in, 127);
+  chassis.pid_wait_until(14.5_in);
+  pros::delay(245);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+  // stops intaking and moves backwards to load into long goal
   Intake1.move(0);
   Intake2.move(0);
-  chassis.pid_drive_set(-29.8_in, DRIVE_SPEED);
-  chassis.pid_wait_until(-29.8_in);
+  // turns a bit more and drives backwards 
+  chassis.pid_turn_set(173_deg, TURN_SPEED);
+  chassis.pid_drive_set(-31.5_in, DRIVE_SPEED);
+  chassis.pid_wait_until(-31.5_in);
+
+  // loads into long goal
   Intake1.move(127);
   Intake2.move(127);
-
-  // // Step 3: Fine alignment and short advance for match loading / pickup
-  // // Face left, re-enable intakes, and activate match loader while moving forward
-  // chassis.pid_turn_set(-120_deg, TURN_SPEED);
-  // chassis.pid_wait();
-  // Intake1.move(127);
-  // Intake2.move(-40);
-  // MatchLoad.set_value(true);
-  // chassis.pid_drive_set(9.8_in, DRIVE_SPEED);
-  // pros::delay(130);
-
-  // // Step 4: Final turn and forward adjustment
-  // // Rotate toward scoring or next interaction zone and move into position
-  // chassis.pid_turn_set(-170_deg, TURN_SPEED);
-  // pros::delay(50);
-  // chassis.pid_drive_set(23.8_in, DRIVE_SPEED);
-  // pros::delay(50);
 }
 
 
