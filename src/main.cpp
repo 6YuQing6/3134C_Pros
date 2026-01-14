@@ -181,7 +181,7 @@ void autonomous()
   // LeftSideSuperRush();
   // ez::as::auton_selector.selected_auton_call();  // Calls selected auton from autonomous selector
   // RightSideSuperRush();
-  jerryio_path_3134c_simple_auton();
+   LeftSideSuperRush();
 }
 
 /**
