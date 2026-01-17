@@ -547,11 +547,13 @@ void LeftSideSuperRush()
   // turn and grab balls
    chassis.pid_turn_set(-24.7_deg, TURN_SPEED);
   chassis.pid_wait_until(-24.7_deg);
-  pros::delay(950); // brief delay to stabilize after turn
+  pros::delay(650); // brief delay to stabilize after turn
+  MatchLoad.set_value(true);
   chassis.pid_speed_max_set(20);//70
   chassis.pid_drive_set(13.1_in, DRIVE_SPEED);
   chassis.pid_wait_until(13.1_in);
   chassis.pid_speed_max_set(DRIVE_SPEED);//70
+  MatchLoad.set_value(false);
   
 
 
@@ -579,7 +581,7 @@ void LeftSideSuperRush()
   // Moves into matchloader 
   chassis.pid_drive_set(18.5_in, 127);
   chassis.pid_wait_until(18.5_in);
-  pros::delay(260);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+  pros::delay(290);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
   // stops intaking and moves backwards to load into long goal
   Intake1.move(0);
   Intake2.move(0);
