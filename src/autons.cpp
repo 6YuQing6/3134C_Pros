@@ -375,7 +375,7 @@ void SoloAWP()
 
 // Alternative autonomous path (simplified / approximate)
 // Goal: Rush forward, reposition across the field, collect, and prep for scoring
-void jerryio_path_3134c_simple_auton() {
+void jerryio_rightside() {
 
   // Step 1: Initial rush forward to collect early game objects
   // Drive forward while running intakes to secure objects quickly
@@ -386,15 +386,15 @@ void jerryio_path_3134c_simple_auton() {
  
 
   // turn and grab balls
-   chassis.pid_turn_set(24.7_deg, TURN_SPEED);
-  chassis.pid_wait_until(24.7_deg);
-  pros::delay(95.0); // brief delay to stabilize after turn
+   chassis.pid_turn_set(26.5_deg, TURN_SPEED);
+  chassis.pid_wait_until(26.5_deg);
+  pros::delay(650); // brief delay to stabilize after turn
+  MatchLoad.set_value(true);
   chassis.pid_speed_max_set(20);//70
-  chassis.pid_drive_set(13.1_in, DRIVE_SPEED);
-  chassis.pid_wait_until(13.1_in);
+  chassis.pid_drive_set(14_in, DRIVE_SPEED);
+  chassis.pid_wait_until(14_in);
   chassis.pid_speed_max_set(DRIVE_SPEED);//70
-  
-
+  MatchLoad.set_value(false);
 
   // // Step 2: Turn and traverse diagonally across the field
   // // Reposition toward the next lane while temporarily stopping intakes
@@ -405,13 +405,13 @@ void jerryio_path_3134c_simple_auton() {
   Intake2.move(0);
 
   // drives toward point between loader and long goal
-  chassis.pid_drive_set(41.5_in, DRIVE_SPEED);
-  chassis.pid_wait_until(41.5_in);
+  chassis.pid_drive_set(40_in, DRIVE_SPEED);
+  chassis.pid_wait_until(40_in);
   MatchLoad.set_value(true);
 
    // turns towards loader 
-  chassis.pid_turn_set(195_deg, TURN_SPEED);
-  chassis.pid_wait_until(195_deg);
+  chassis.pid_turn_set(185_deg, TURN_SPEED);
+  chassis.pid_wait_until(185_deg);
   //  chassis.pid_wait();
   // first intake is bottom, second is top
   Intake1.move(127);
@@ -420,7 +420,7 @@ void jerryio_path_3134c_simple_auton() {
   // Moves into matchloader 
   chassis.pid_drive_set(18.5_in, 127);
   chassis.pid_wait_until(18.5_in);
-  pros::delay(260);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+  pros::delay(310);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
   // stops intaking and moves backwards to load into long goal
   Intake1.move(0);
   Intake2.move(0);
@@ -581,7 +581,7 @@ void LeftSideSuperRush()
   // Moves into matchloader 
   chassis.pid_drive_set(18_in, 127);
   chassis.pid_wait_until(18_in);
-  pros::delay(290);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+  pros::delay(310);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
   // stops intaking and moves backwards to load into long goal
   Intake1.move(0);
   Intake2.move(0);
@@ -767,224 +767,250 @@ void LeftSideRushPush()
 
 void Skills()
 {
-  chassis.pid_drive_set(30_in, DRIVE_SPEED);
-  chassis.pid_wait();
-
-  Intake1.move(127);
-  Intake2.move(-40); 
-  MatchLoad.set_value(true);
+  chassis.pid_drive_set(37_in, DRIVE_SPEED);
+  chassis.pid_wait_until(37_in);
   chassis.pid_turn_set(90_deg, TURN_SPEED);
   chassis.pid_wait_until(90_deg);
-  chassis.pid_drive_set(21_in, 50);
-  chassis.pid_wait_until(2_in);
-  chassis.pid_speed_max_set(DRIVE_SPEED);
-  pros::delay(2000);
-
-
-  chassis.pid_drive_set(-18_in, DRIVE_SPEED);
-  chassis.pid_wait_until(-18_in); 
-  Intake1.move(0);
-  Intake2.move(0); 
-
-  chassis.pid_turn_set(180_deg, TURN_SPEED);
-  chassis.pid_wait_until(180_deg); 
-
-  chassis.pid_drive_set(96_in, DRIVE_SPEED);
-  chassis.pid_wait();
-  //chassis.pid_wait_until(97_in);
-
-   chassis.pid_turn_set(90_deg, TURN_SPEED);
-  chassis.pid_wait_until(90_deg); 
-
-  chassis.pid_drive_set(-25_in, DRIVE_SPEED);
-  pros::delay(500);//700
-  chassis.drive_set(-20, -20);
+  MatchLoad.set_value(true);
   Intake1.move(127);
-  Intake2.move(127);  
-  pros::delay(1600);
-  Intake2.move(-40);
-
-
-  // chassis.pid_drive_set(34_in, DRIVE_SPEED);//30
-  // chassis.pid_wait_until(20_in);
-  // chassis.pid_speed_max_set(40);
-  // chassis.pid_wait_until(25_in);
-  // chassis.pid_speed_max_set(DRIVE_SPEED);
-  // pros::delay(1800);
-  chassis.pid_drive_set(36_in, DRIVE_SPEED,true);//30
-  chassis.pid_wait_until(15_in);
-  chassis.pid_speed_max_set(40);
-  chassis.pid_wait_until(25_in);
-  chassis.pid_speed_max_set(DRIVE_SPEED);
-  pros::delay(2000);
-
-
-  chassis.pid_drive_set(-35_in, DRIVE_SPEED);
-  pros::delay(1250);
-  chassis.drive_set(-20, -20);
-  Intake1.move(127);
-  Intake2.move(127);  
-  pros::delay(1600);
+  Intake2.move(0);
+  chassis.pid_drive_set(9_in, DRIVE_SPEED);
+  chassis.pid_wait_until(9_in);
+  pros::delay(620);
   Intake1.move(0);
   Intake2.move(0);  
+  chassis.pid_drive_set(-9_in, DRIVE_SPEED);
+  chassis.pid_wait_until(-9_in);
   MatchLoad.set_value(false);
+  chassis.pid_turn_set(0_deg, TURN_SPEED);
+  chassis.pid_wait_until(0_deg);
   chassis.pid_drive_set(15_in, DRIVE_SPEED);
-  chassis.pid_wait();
-  chassis.pid_turn_set(45_deg, TURN_SPEED);
-  chassis.pid_wait();
-  chassis.pid_drive_set(-18_in, DRIVE_SPEED);
-  chassis.pid_wait();
-  chassis.pid_turn_set(90_deg, TURN_SPEED);
-  chassis.pid_wait();
-  chassis.pid_drive_set(-72_in, DRIVE_SPEED);
-  chassis.pid_wait();
-  chassis.pid_turn_set(0_deg, TURN_SPEED);
-  chassis.pid_wait(); 
-  chassis.pid_drive_set(13_in, DRIVE_SPEED);//15
-  chassis.pid_wait();
-
-  chassis.pid_turn_set(-90_deg, TURN_SPEED);
-  chassis.pid_wait();  
-  MatchLoad.set_value(true);
-  Intake1.move(127);
-  Intake2.move(-40); 
-  
-  chassis.pid_drive_set(21_in, 40);//90 SPEED DRIVE SPEED
-   chassis.pid_wait();
-  chassis.pid_wait_until(10_in);             //////////// 6
-
-  chassis.pid_speed_max_set(DRIVE_SPEED);
-  pros::delay(2000);//MEJOR METER UNA ROJA POR SI ACASO 900
-
-//////////////////
-
-  chassis.pid_drive_set(-18_in, DRIVE_SPEED);
-  chassis.pid_wait_until(-18_in); 
- chassis.pid_wait();
-
-  Intake1.move(0);
-  Intake2.move(0); 
-
-  chassis.pid_turn_set(0_deg, TURN_SPEED);
-  chassis.pid_wait_until(0_deg);  
-  chassis.pid_drive_set(94_in, DRIVE_SPEED);
-  chassis.pid_wait();
-  // chassis.pid_wait_until(96_in);
-   chassis.pid_turn_set(-90_deg, TURN_SPEED);
-  chassis.pid_wait_until(-90_deg); 
-
-  chassis.pid_drive_set(-25_in, DRIVE_SPEED);
-  pros::delay(700);
-
-  chassis.drive_set(-20, -20);
-
-  Intake1.move(127);
-  Intake2.move(127);  
-  pros::delay(1600);
-  Intake2.move(-40);
-
-
-  // chassis.pid_drive_set(34_in, DRIVE_SPEED);//30
-  // chassis.pid_wait_until(20_in);
-  // chassis.pid_speed_max_set(40);
-  // chassis.pid_wait_until(25_in);
-  // chassis.pid_speed_max_set(DRIVE_SPEED);
-  // pros::delay(1600);
-  chassis.pid_drive_set(36_in, DRIVE_SPEED,true);//30
   chassis.pid_wait_until(15_in);
-  chassis.pid_speed_max_set(40);
-  chassis.pid_wait_until(25_in);
-  chassis.pid_speed_max_set(DRIVE_SPEED);
-  pros::delay(2000);
-
-  chassis.pid_drive_set(-35_in, DRIVE_SPEED);
-  pros::delay(1250);
-
-  chassis.drive_set(-20, -20);
-
-  Intake1.move(127);
-  Intake2.move(127);  
-  pros::delay(1600);
-  // Intake1.move(0);
-  // Intake2.move(0);  
-  MatchLoad.set_value(false);
- Intake2.move(-40);  
-
-  chassis.pid_drive_set(15_in, DRIVE_SPEED);//30
-  chassis.pid_wait();
-  chassis.pid_turn_set(135_deg, TURN_SPEED);
-  chassis.pid_wait();
-  chassis.pid_drive_set(37_in, DRIVE_SPEED);//30
-  // chassis.pid_wait_until(37_in);
- chassis.pid_wait();
-  chassis.pid_turn_set(90_deg, TURN_SPEED);
-  // chassis.pid_wait_until(90_deg);
- chassis.pid_wait();
-   chassis.pid_drive_set(48_in, DRIVE_SPEED);//30
-  // chassis.pid_wait_until(48_in);
- chassis.pid_wait();
-   chassis.pid_turn_set(180_deg, TURN_SPEED);
-  // chassis.pid_wait_until(180_deg); 
- chassis.pid_wait();
+  chassis.pid_turn_set(-90_deg, TURN_SPEED);
+  chassis.pid_wait_until(-90_deg);
+  chassis.pid_drive_set(80_in, DRIVE_SPEED);
+  chassis.pid_wait_until(80_in);
+  
 
 
-   chassis.pid_drive_set(51_in, DRIVE_SPEED);//50
-  // chassis.pid_wait_until(50_in);
- chassis.pid_wait();
-   chassis.pid_turn_set(135_deg, TURN_SPEED);
-  chassis.pid_wait(); 
+//   chassis.pid_drive_set(30_in, DRIVE_SPEED);
+//   chassis.pid_wait();
 
-  Intake1.move(-127);
-  pros::delay(50);
+//   Intake1.move(127);
+//   Intake2.move(-40); 
+//   MatchLoad.set_value(true);
+//   chassis.pid_turn_set(90_deg, TURN_SPEED);
+//   chassis.pid_wait_until(90_deg);
+//   chassis.pid_drive_set(21_in, 50);
+//   chassis.pid_wait_until(2_in);
+//   chassis.pid_speed_max_set(DRIVE_SPEED);
+//   pros::delay(2000);
 
-  chassis.pid_drive_set(-28_in, DRIVE_SPEED);//-23
-  CenterGoal.set_value(true);
-  Intake1.move(0);
 
-  chassis.pid_wait_until(-20_in);//
-  Intake1.move(127);
-  Intake2.move(30);
-  CenterGoal.set_value(true);
-  pros::delay(1600);//900
-  Intake2.move(127);
-  CenterGoal.set_value(false);
+//   chassis.pid_drive_set(-18_in, DRIVE_SPEED);
+//   chassis.pid_wait_until(-18_in); 
+//   Intake1.move(0);
+//   Intake2.move(0); 
+
+//   chassis.pid_turn_set(180_deg, TURN_SPEED);
+//   chassis.pid_wait_until(180_deg); 
+
+//   chassis.pid_drive_set(96_in, DRIVE_SPEED);
+//   chassis.pid_wait();
+//   //chassis.pid_wait_until(97_in);
+
+//    chassis.pid_turn_set(90_deg, TURN_SPEED);
+//   chassis.pid_wait_until(90_deg); 
+
+//   chassis.pid_drive_set(-25_in, DRIVE_SPEED);
+//   pros::delay(500);//700
+//   chassis.drive_set(-20, -20);
+//   Intake1.move(127);
+//   Intake2.move(127);  
+//   pros::delay(1600);
+//   Intake2.move(-40);
+
+
+//   // chassis.pid_drive_set(34_in, DRIVE_SPEED);//30
+//   // chassis.pid_wait_until(20_in);
+//   // chassis.pid_speed_max_set(40);
+//   // chassis.pid_wait_until(25_in);
+//   // chassis.pid_speed_max_set(DRIVE_SPEED);
+//   // pros::delay(1800);
+//   chassis.pid_drive_set(36_in, DRIVE_SPEED,true);//30
+//   chassis.pid_wait_until(15_in);
+//   chassis.pid_speed_max_set(40);
+//   chassis.pid_wait_until(25_in);
+//   chassis.pid_speed_max_set(DRIVE_SPEED);
+//   pros::delay(2000);
+
+
+//   chassis.pid_drive_set(-35_in, DRIVE_SPEED);
+//   pros::delay(1250);
+//   chassis.drive_set(-20, -20);
+//   Intake1.move(127);
+//   Intake2.move(127);  
+//   pros::delay(1600);
+//   Intake1.move(0);
+//   Intake2.move(0);  
+//   MatchLoad.set_value(false);
+//   chassis.pid_drive_set(15_in, DRIVE_SPEED);
+//   chassis.pid_wait();
+//   chassis.pid_turn_set(45_deg, TURN_SPEED);
+//   chassis.pid_wait();
+//   chassis.pid_drive_set(-18_in, DRIVE_SPEED);
+//   chassis.pid_wait();
+//   chassis.pid_turn_set(90_deg, TURN_SPEED);
+//   chassis.pid_wait();
+//   chassis.pid_drive_set(-72_in, DRIVE_SPEED);
+//   chassis.pid_wait();
+//   chassis.pid_turn_set(0_deg, TURN_SPEED);
+//   chassis.pid_wait(); 
+//   chassis.pid_drive_set(13_in, DRIVE_SPEED);//15
+//   chassis.pid_wait();
+
+//   chassis.pid_turn_set(-90_deg, TURN_SPEED);
+//   chassis.pid_wait();  
+//   MatchLoad.set_value(true);
+//   Intake1.move(127);
+//   Intake2.move(-40); 
+  
+//   chassis.pid_drive_set(21_in, 40);//90 SPEED DRIVE SPEED
+//    chassis.pid_wait();
+//   chassis.pid_wait_until(10_in);             //////////// 6
+
+//   chassis.pid_speed_max_set(DRIVE_SPEED);
+//   pros::delay(2000);//MEJOR METER UNA ROJA POR SI ACASO 900
+
+// //////////////////
+
+//   chassis.pid_drive_set(-18_in, DRIVE_SPEED);
+//   chassis.pid_wait_until(-18_in); 
+//  chassis.pid_wait();
+
+//   Intake1.move(0);
+//   Intake2.move(0); 
+
+//   chassis.pid_turn_set(0_deg, TURN_SPEED);
+//   chassis.pid_wait_until(0_deg);  
+//   chassis.pid_drive_set(94_in, DRIVE_SPEED);
+//   chassis.pid_wait();
+//   // chassis.pid_wait_until(96_in);
+//    chassis.pid_turn_set(-90_deg, TURN_SPEED);
+//   chassis.pid_wait_until(-90_deg); 
+
+//   chassis.pid_drive_set(-25_in, DRIVE_SPEED);
+//   pros::delay(700);
+
+//   chassis.drive_set(-20, -20);
+
+//   Intake1.move(127);
+//   Intake2.move(127);  
+//   pros::delay(1600);
+//   Intake2.move(-40);
+
+
+//   // chassis.pid_drive_set(34_in, DRIVE_SPEED);//30
+//   // chassis.pid_wait_until(20_in);
+//   // chassis.pid_speed_max_set(40);
+//   // chassis.pid_wait_until(25_in);
+//   // chassis.pid_speed_max_set(DRIVE_SPEED);
+//   // pros::delay(1600);
+//   chassis.pid_drive_set(36_in, DRIVE_SPEED,true);//30
+//   chassis.pid_wait_until(15_in);
+//   chassis.pid_speed_max_set(40);
+//   chassis.pid_wait_until(25_in);
+//   chassis.pid_speed_max_set(DRIVE_SPEED);
+//   pros::delay(2000);
+
+//   chassis.pid_drive_set(-35_in, DRIVE_SPEED);
+//   pros::delay(1250);
+
+//   chassis.drive_set(-20, -20);
+
+//   Intake1.move(127);
+//   Intake2.move(127);  
+//   pros::delay(1600);
+//   // Intake1.move(0);
+//   // Intake2.move(0);  
+//   MatchLoad.set_value(false);
+//  Intake2.move(-40);  
+
+//   chassis.pid_drive_set(15_in, DRIVE_SPEED);//30
+//   chassis.pid_wait();
+//   chassis.pid_turn_set(135_deg, TURN_SPEED);
+//   chassis.pid_wait();
+//   chassis.pid_drive_set(37_in, DRIVE_SPEED);//30
+//   // chassis.pid_wait_until(37_in);
+//  chassis.pid_wait();
+//   chassis.pid_turn_set(90_deg, TURN_SPEED);
+//   // chassis.pid_wait_until(90_deg);
+//  chassis.pid_wait();
+//    chassis.pid_drive_set(48_in, DRIVE_SPEED);//30
+//   // chassis.pid_wait_until(48_in);
+//  chassis.pid_wait();
+//    chassis.pid_turn_set(180_deg, TURN_SPEED);
+//   // chassis.pid_wait_until(180_deg); 
+//  chassis.pid_wait();
+
+
+//    chassis.pid_drive_set(51_in, DRIVE_SPEED);//50
+//   // chassis.pid_wait_until(50_in);
+//  chassis.pid_wait();
+//    chassis.pid_turn_set(135_deg, TURN_SPEED);
+//   chassis.pid_wait(); 
+
+//   Intake1.move(-127);
+//   pros::delay(50);
+
+//   chassis.pid_drive_set(-28_in, DRIVE_SPEED);//-23
+//   CenterGoal.set_value(true);
+//   Intake1.move(0);
+
+//   chassis.pid_wait_until(-20_in);//
+//   Intake1.move(127);
+//   Intake2.move(30);
+//   CenterGoal.set_value(true);
+//   pros::delay(1600);//900
+//   Intake2.move(127);
+//   CenterGoal.set_value(false);
 
   
-   chassis.pid_drive_set(30_in, DRIVE_SPEED);//30
-    chassis.pid_wait();
+//    chassis.pid_drive_set(30_in, DRIVE_SPEED);//30
+//     chassis.pid_wait();
 
-  // chassis.pid_wait_until(30_in);
-  chassis.pid_turn_set(90_deg, TURN_SPEED);
-   chassis.pid_wait();
-  // chassis.pid_wait_until(90_deg);
-  chassis.pid_drive_set(23_in, DRIVE_SPEED);//30
-   chassis.pid_wait();
-  // chassis.pid_wait_until(24_in); 
- chassis.pid_swing_set(ez::RIGHT_SWING, 0_deg, SWING_SPEED, 0);
- chassis.pid_wait();
-  // Intake1.move(-127);
-  // Intake2.move(-127);
+//   // chassis.pid_wait_until(30_in);
+//   chassis.pid_turn_set(90_deg, TURN_SPEED);
+//    chassis.pid_wait();
+//   // chassis.pid_wait_until(90_deg);
+//   chassis.pid_drive_set(23_in, DRIVE_SPEED);//30
+//    chassis.pid_wait();
+//   // chassis.pid_wait_until(24_in); 
+//  chassis.pid_swing_set(ez::RIGHT_SWING, 0_deg, SWING_SPEED, 0);
+//  chassis.pid_wait();
+//   // Intake1.move(-127);
+//   // Intake2.move(-127);
 
-//   chassis.pid_drive_set(10_in, DRIVE_SPEED);//30
+// //   chassis.pid_drive_set(10_in, DRIVE_SPEED);//30
+// //   chassis.pid_wait_until(7_in); 
+// //   MatchLoad.set_value(true);
+  
+// //  chassis.drive_set(80, 80);
+
+// //  pros::delay(500);
+// // MatchLoad.set_value(false);
+// // pros::delay(600);
+// //   chassis.drive_set(0, 0);
+
+//   chassis.pid_drive_set(40_in, 40);//30
 //   chassis.pid_wait_until(7_in); 
 //   MatchLoad.set_value(true);
-  
-//  chassis.drive_set(80, 80);
-
-//  pros::delay(500);
-// MatchLoad.set_value(false);
-// pros::delay(600);
-//   chassis.drive_set(0, 0);
-
-  chassis.pid_drive_set(40_in, 40);//30
-  chassis.pid_wait_until(7_in); 
-  MatchLoad.set_value(true);
-  chassis.pid_speed_max_set(DRIVE_SPEED);
-  chassis.pid_wait_until(13_in);
-  // MatchLoad.set_value(false); 
-  chassis.pid_wait_until(40_in); 
-  MatchLoad.set_value(false);
-//  pros::delay(500);
+//   chassis.pid_speed_max_set(DRIVE_SPEED);
+//   chassis.pid_wait_until(13_in);
+//   // MatchLoad.set_value(false); 
+//   chassis.pid_wait_until(40_in); 
+//   MatchLoad.set_value(false);
+// //  pros::delay(500);
 }
 
 
