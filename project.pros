@@ -1,7 +1,7 @@
 {
   "py/object": "pros.conductor.project.Project",
   "py/state": {
-    "project_name": "3134C_RightSide",
+    "project_name": "3134C_LeftSide",
     "target": "v5",
     "templates": {
       "EZ-Template": {
@@ -425,8 +425,8 @@
     },
     "upload_options": {
       "description": "roboticsisez.com",
-      "icon": "pizza",
-      "slot": 4
+      "icon": "planet",
+      "slot": 3
     },
     "use_early_access": false
   }
