@@ -178,10 +178,11 @@ void autonomous()
   to be consistent
   
   */
-  LeftSideSuperRush();
+  // LeftSideSuperRush();
   // ez::as::auton_selector.selected_auton_call();  // Calls selected auton from autonomous selector
   // RightSideSuperRush();
    //Skills()
+   jerryio_rightside();
 }
 
 /**

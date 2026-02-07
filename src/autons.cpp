@@ -388,11 +388,13 @@ void jerryio_rightside() {
   // turn and grab balls
    chassis.pid_turn_set(26.5_deg, TURN_SPEED);
   chassis.pid_wait_until(26.5_deg);
-  pros::delay(650); // brief delay to stabilize after turn
-  MatchLoad.set_value(true);
+  pros::delay(650); // brief delay to stabilize after turn////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  chassis.pid_drive_set(5_in, DRIVE_SPEED);
+  chassis.pid_wait_until(5_in);
+   MatchLoad.set_value(true);
   chassis.pid_speed_max_set(20);//70
-  chassis.pid_drive_set(14_in, DRIVE_SPEED);
-  chassis.pid_wait_until(14_in);
+  chassis.pid_drive_set(10_in, DRIVE_SPEED);
+  chassis.pid_wait_until(10_in);
   chassis.pid_speed_max_set(DRIVE_SPEED);//70
   MatchLoad.set_value(false);
 
@@ -405,30 +407,30 @@ void jerryio_rightside() {
   Intake2.move(0);
 
   // drives toward point between loader and long goal
-  chassis.pid_drive_set(40_in, DRIVE_SPEED);
-  chassis.pid_wait_until(40_in);
+  chassis.pid_drive_set(43.5_in, DRIVE_SPEED);
+  chassis.pid_wait_until(43.5_in);
   MatchLoad.set_value(true);
 
    // turns towards loader 
-  chassis.pid_turn_set(185_deg, TURN_SPEED);
-  chassis.pid_wait_until(185_deg);
+  chassis.pid_turn_set(180_deg, TURN_SPEED);
+  chassis.pid_wait_until(180_deg);
   //  chassis.pid_wait();
   // first intake is bottom, second is top
   Intake1.move(127);
   Intake2.move(0);
-
   // Moves into matchloader 
-  chassis.pid_drive_set(19.5_in, 127);
-  chassis.pid_wait_until(19.5_in);
+  chassis.pid_drive_set(20_in, 127);
+  chassis.pid_wait_until(20_in);
   pros::delay(310);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
   // stops intaking and moves backwards to load into long goal
   Intake1.move(0);
   Intake2.move(0);
   // turns a bit more and drives backwards 
+  MatchLoad.set_value(true);
   chassis.pid_turn_set(180_deg, TURN_SPEED);
   chassis.pid_wait_until(180_deg);
-  chassis.pid_drive_set(-31.5_in, DRIVE_SPEED);
-  chassis.pid_wait_until(-31.5_in);
+  chassis.pid_drive_set(-33.5_in, DRIVE_SPEED);
+  chassis.pid_wait_until(-33.5_in);
 
   // loads into long goal
   Intake1.move(127);
@@ -538,24 +540,26 @@ void RightSideRushPush()
 
 void LeftSideSuperRush()
 {
-   Intake1.move(127);
+   // Step 1: Initial rush forward to collect early game objects
+  // Drive forward while running intakes to secure objects quickly
+  Intake1.move(127);
   Intake2.move(-40); 
   chassis.pid_drive_set(25.6_in, DRIVE_SPEED);
   chassis.pid_wait_until(25.6_in);//27 NO HE PROBADO
  
 
   // turn and grab balls
-   chassis.pid_turn_set(-24.7_deg, TURN_SPEED);
-  chassis.pid_wait_until(-24.7_deg);
-  pros::delay(650); // brief delay to stabilize after turn
-  MatchLoad.set_value(true);
+   chassis.pid_turn_set(-26.5_deg, TURN_SPEED);
+  chassis.pid_wait_until(-26.5_deg);
+  pros::delay(650); // brief delay to stabilize after turn////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  chassis.pid_drive_set(5_in, DRIVE_SPEED);
+  chassis.pid_wait_until(5_in);
+   MatchLoad.set_value(true);
   chassis.pid_speed_max_set(20);//70
-  chassis.pid_drive_set(13.1_in, DRIVE_SPEED);
-  chassis.pid_wait_until(13.1_in);
+  chassis.pid_drive_set(10_in, DRIVE_SPEED);
+  chassis.pid_wait_until(10_in);
   chassis.pid_speed_max_set(DRIVE_SPEED);//70
   MatchLoad.set_value(false);
-  
-
 
   // // Step 2: Turn and traverse diagonally across the field
   // // Reposition toward the next lane while temporarily stopping intakes
@@ -566,74 +570,91 @@ void LeftSideSuperRush()
   Intake2.move(0);
 
   // drives toward point between loader and long goal
-  chassis.pid_drive_set(41.5_in, DRIVE_SPEED);
-  chassis.pid_wait_until(41.5_in);
+  chassis.pid_drive_set(43.5_in, DRIVE_SPEED);
+  chassis.pid_wait_until(43.5_in);
   MatchLoad.set_value(true);
 
    // turns towards loader 
-  chassis.pid_turn_set(-185_deg, TURN_SPEED);
-  chassis.pid_wait_until(-185_deg);
+  chassis.pid_turn_set(180_deg, TURN_SPEED);
+  chassis.pid_wait_until(180_deg);
   //  chassis.pid_wait();
   // first intake is bottom, second is top
   Intake1.move(127);
   Intake2.move(0);
-
   // Moves into matchloader 
-  chassis.pid_drive_set(19_in, 127);
-  chassis.pid_wait_until(19_in);
+  chassis.pid_drive_set(20_in, 127);
+  chassis.pid_wait_until(20_in);
   pros::delay(310);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
   // stops intaking and moves backwards to load into long goal
   Intake1.move(0);
   Intake2.move(0);
   // turns a bit more and drives backwards 
-  chassis.pid_turn_set(-185_deg, TURN_SPEED);
-  chassis.pid_wait_until(-185_deg);
-  chassis.pid_drive_set(-31.5_in, DRIVE_SPEED);
-  chassis.pid_wait_until(-31.5_in);
+  MatchLoad.set_value(true);
+  chassis.pid_turn_set(-175_deg, TURN_SPEED);
+  chassis.pid_wait_until(175_deg);
+  chassis.pid_drive_set(-33.5_in, DRIVE_SPEED);
+  chassis.pid_wait_until(-33.5_in);
 
   // loads into long goal
   Intake1.move(127);
   Intake2.move(127);
+  // Intake1.move(127);
+  // Intake2.move(-40); 
+  // chassis.pid_drive_set(25.6_in, DRIVE_SPEED);
+  // chassis.pid_wait_until(25.6_in);//27 NO HE PROBADO
+ 
 
-//   Intake1.move(127);
-//   Intake2.move(-40);
+  // // turn and grab balls
+  //  chassis.pid_turn_set(-24.7_deg, TURN_SPEED);
+  // chassis.pid_wait_until(-24.7_deg);
+  // pros::delay(650); // brief delay to stabilize after turn
+  // MatchLoad.set_value(true);
+  // chassis.pid_speed_max_set(20);//70
+  // chassis.pid_drive_set(13.1_in, DRIVE_SPEED);
+  // chassis.pid_wait_until(13.1_in);
+  // chassis.pid_speed_max_set(DRIVE_SPEED);//70
+  // MatchLoad.set_value(false);
+  
 
-//   // chassis.pid_drive_set(31_in, 80);
-//   // chassis.pid_wait_until(21_in);//20
 
-//   // MatchLoad.set_value(true);
+  // // // Step 2: Turn and traverse diagonally across the field
+  // // // Reposition toward the next lane while temporarily stopping intakes
+  // chassis.pid_turn_set(-125_deg, TURN_SPEED);
+  // chassis.pid_wait_until(-125_deg);
+  // // chassis.pid_wait();
+  // Intake1.move(0);
+  // Intake2.move(0);
 
-//   // chassis.pid_wait_until(31_in);
+  // // drives toward point between loader and long goal
+  // chassis.pid_drive_set(41.5_in, DRIVE_SPEED);
+  // chassis.pid_wait_until(41.5_in);
+  // MatchLoad.set_value(true);
 
-//   chassis.pid_drive_set(31_in, DRIVE_SPEED);
-//   chassis.pid_wait_until(14_in);//27 NO HE PROBADO
-//   chassis.pid_speed_max_set(20);//70
-//   chassis.pid_wait_until(19_in);
-//   chassis.pid_speed_max_set(DRIVE_SPEED);//70
-//   chassis.pid_wait_until(31_in);
+  //  // turns towards loader 
+  // chassis.pid_turn_set(-185_deg, TURN_SPEED);
+  // chassis.pid_wait_until(-185_deg);
+  // //  chassis.pid_wait();
+  // // first intake is bottom, second is top
+  // Intake1.move(127);
+  // Intake2.move(0);
 
-//   // Giro espejeado (antes era +100°)
-//   chassis.pid_turn_set(-100_deg, TURN_SPEED);
-//   chassis.pid_wait_until(-99_deg);
+  // // Moves into matchloader 
+  // chassis.pid_drive_set(19_in, 127);
+  // chassis.pid_wait_until(19_in);
+  // pros::delay(310);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+  // // stops intaking and moves backwards to load into long goal
+  // Intake1.move(0);
+  // Intake2.move(0);
+  // // turns a bit more and drives backwards 
+  // chassis.pid_turn_set(-185_deg, TURN_SPEED);
+  // chassis.pid_wait_until(-185_deg);
+  // chassis.pid_drive_set(-31.5_in, DRIVE_SPEED);
+  // chassis.pid_wait_until(-31.5_in);
 
-//   chassis.pid_drive_set(26_in, DRIVE_SPEED);
-//   chassis.pid_wait_until(24_in);
+  // // loads into long goal
+  // Intake1.move(127);
+  // Intake2.move(127);
 
-//   // Giro espejeado (antes era +162°)
-//   chassis.pid_turn_set(-162_deg, TURN_SPEED);
-//   chassis.pid_wait_until(-160_deg);
-
-//   //MatchLoad.set_value(false);
-
-//   chassis.pid_drive_set(-33_in, 127);
-//   pros::delay(500);
-
-//   chassis.drive_set(-10, -10);
-//   Intake2.move(127);
-//   pros::delay(1000);
-//   Intake1.move(0);
-//   Intake2.move(0);
-//   pushToLongGoal();
 }
 
 void LeftSideMiddle()
