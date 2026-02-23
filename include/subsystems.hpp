@@ -7,7 +7,7 @@ extern Drive chassis;
 
 
 inline pros::Motor Intake1(-1);
-inline pros::Motor Intake2(-11);
+inline pros::Motor Intake2(-13);
 
 // Sensores
 inline pros::Optical ColorSortSensor(10);
